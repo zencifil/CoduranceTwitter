@@ -3,6 +3,12 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoduranceTwitter.UI", "CoduranceTwitter.UI\CoduranceTwitter.UI.csproj", "{0D56B9E8-A688-41C3-AD73-6BE72EEC568C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoduranceTwitter.UI.Test", "CoduranceTwitter.UI.Test\CoduranceTwitter.UI.Test.csproj", "{ED07FBC2-3A07-48F8-85DC-2B837ED52360}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoduranceTwitter.Core", "CoduranceTwitter.Core\CoduranceTwitter.Core.csproj", "{4C521F6B-595E-4DD3-A246-394B02FAF5C1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoduranceTwitter.Core.Test", "CoduranceTwitter.Core.Test\CoduranceTwitter.Core.Test.csproj", "{EBC324E4-5119-417D-A2E3-97EDB23BD184}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,5 +19,17 @@ Global
 		{0D56B9E8-A688-41C3-AD73-6BE72EEC568C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0D56B9E8-A688-41C3-AD73-6BE72EEC568C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0D56B9E8-A688-41C3-AD73-6BE72EEC568C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ED07FBC2-3A07-48F8-85DC-2B837ED52360}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ED07FBC2-3A07-48F8-85DC-2B837ED52360}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ED07FBC2-3A07-48F8-85DC-2B837ED52360}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ED07FBC2-3A07-48F8-85DC-2B837ED52360}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C521F6B-595E-4DD3-A246-394B02FAF5C1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C521F6B-595E-4DD3-A246-394B02FAF5C1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C521F6B-595E-4DD3-A246-394B02FAF5C1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C521F6B-595E-4DD3-A246-394B02FAF5C1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EBC324E4-5119-417D-A2E3-97EDB23BD184}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EBC324E4-5119-417D-A2E3-97EDB23BD184}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EBC324E4-5119-417D-A2E3-97EDB23BD184}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EBC324E4-5119-417D-A2E3-97EDB23BD184}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
