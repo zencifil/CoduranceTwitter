@@ -12,4 +12,11 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Command\" />
+    <Folder Include="Command\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CoduranceTwitter.Core\CoduranceTwitter.Core.csproj" />
+  </ItemGroup>
 </Project>
