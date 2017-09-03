@@ -13,7 +13,7 @@ namespace CoduranceTwitter.Core.Commands {
         }
 
         public IEnumerable Execute() {
-            return new List<string>();
+            return null;
         }
     }
 }

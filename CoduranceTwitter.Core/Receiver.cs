@@ -10,7 +10,10 @@ namespace CoduranceTwitter.Core {
         private static volatile Receiver _receiver;
         private static readonly object _syncLock = new object();
 
+        private List<Models.IUser> _users;
+
         private Receiver() {
+            _users = new List<Models.IUser>();
         }
 
         public static Receiver Instance {
@@ -38,9 +41,29 @@ namespace CoduranceTwitter.Core {
 
             if (disposing) {
                 _receiver = null;
+                _users = null;
                 _disposed = true;
             }
         }
 
+        public void CreateUser(string username) {
+            var user = GetUser(username);
+            if (user == null)
+                this._users.Add(new Models.User(username));
+        }
+
+        public Models.IUser GetUser(string username) {
+            return this._users.Find(u => u.Username == username);
+        }
+
+        public List<Models.ITweet> GetUserTweets(string username) {
+            List<Models.ITweet> tweetList = new List<Models.ITweet>();
+            var tweets = this._users.Find(u => u.Username == username).Tweets;
+            foreach (var tweet in tweets) {
+                tweetList.Add((Models.ITweet)tweet);
+            }
+
+            return tweetList;
+        }
     }
 }
