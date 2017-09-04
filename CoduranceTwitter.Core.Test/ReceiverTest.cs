@@ -31,6 +31,14 @@ namespace CoduranceTwitter.Core.Test {
             Assert.Equal(username, user.Username);
         }
 
+		[Fact]
+		public void WhenTweetsForFirstTime_ShouldCreateUser() {
+			var username = "firstTimeUser";
+            var tweet = new Models.Tweet("this is my first tweet.");
+            _receiver.PerformPost(username, tweet);
+            var user = _receiver.GetUser(username);
 
+            Assert.Equal(username, user.Username);
+		}
     }
 }

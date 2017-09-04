@@ -5,6 +5,6 @@ namespace CoduranceTwitter.Core {
     
     public interface IUser {
 
-        void AddTweet(Tweet tweet);
+        void AddTweet(Models.ITweet tweet);
     }
 }

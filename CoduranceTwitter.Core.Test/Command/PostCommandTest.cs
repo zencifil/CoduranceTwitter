@@ -22,6 +22,8 @@ namespace CoduranceTwitter.Core.Test.Command {
             ICommand postCommand = new PostCommand(_receiver);
             postCommand.Execute();
             var actual = _receiver.GetUser(username);
+
+
         }
         
 

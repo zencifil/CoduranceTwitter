@@ -46,6 +46,15 @@ namespace CoduranceTwitter.Core {
             }
         }
 
+        public IEnumerable PerformPost(string username, Models.ITweet tweet) {
+            CreateUser(username);
+            var user = GetUser(username);
+            IUser userController = new User(user);
+            userController.AddTweet(tweet);
+
+            return new List<string>();
+        }
+
         public void CreateUser(string username) {
             var user = GetUser(username);
             if (user == null)
@@ -65,5 +74,6 @@ namespace CoduranceTwitter.Core {
 
             return tweetList;
         }
+
     }
 }

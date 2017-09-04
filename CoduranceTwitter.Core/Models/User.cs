@@ -7,19 +7,42 @@ namespace CoduranceTwitter.Core.Models {
     public class User : IUser {
 
         private string _username;
-        private IEnumerable _tweets;
-        private IList _following;
+        private IList<Models.ITweet> _tweets;
+        private IList<Models.IUser> _following;
 
         public User(string username) {
             this._username = username;
-            this._tweets = new List<Tweet>();
-            this._following = new List<User>();
+            this._tweets = new List<Models.ITweet>();
+            this._following = new List<Models.IUser>();
         }
 
-        public string Username => _username;
+        public string Username {
+            get {
+                return _username;
+            }
+            set {
+                _username = value;
+            }
+        }
 
-        public IEnumerable Tweets => _tweets;
+        public IList<Models.ITweet> Tweets {
+            get {
+                return _tweets;
+            }
+            set {
+                _tweets = value;
+            }
+        }
 
-        public IList Following => _following;
+        public IList<Models.IUser> Following {
+            get {
+                return _following;
+            }
+            set {
+                _following = value;
+            }
+        }
+
+
     }
 }
