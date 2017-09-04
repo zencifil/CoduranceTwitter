@@ -25,5 +25,9 @@ namespace CoduranceTwitter.Core.Services {
 
             this._user.Following.Add(user);
         }
+
+        public IList<ITweet> GetTweetList() {
+            return this._user.Tweets;
+        }
     }
 }

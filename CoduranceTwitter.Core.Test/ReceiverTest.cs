@@ -45,9 +45,22 @@ namespace CoduranceTwitter.Core.Test {
         [Fact]
         public void WhenPerformFollowCalledWithNonExistingUsername_ShouldThrowException() {
 			var username = "savas";
-			var usernameToFollow = "ThisUserIsNotExist";
+			var usernameToFollow = "ThisUserDoesNotExist";
 
 			Assert.Throws<ArgumentException>(() => _receiver.PerformFollow(username, usernameToFollow));
+        }
+
+        [Fact]
+        public void WhenPerformReadCalled_ShouldReturnTweetList() {
+            var username = "savas";
+            var tweet1 = "first tweet of the day...";
+            var tweet2 = "second tweet of the day...";
+            _receiver.PerformPost(username, tweet1);
+            _receiver.PerformPost(username, tweet2);
+
+            var tweets = _receiver.PerformRead(username);
+
+            Assert.Equal(2, tweets.Count);
         }
     }
 }

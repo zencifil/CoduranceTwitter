@@ -48,7 +48,7 @@ namespace CoduranceTwitter.Core {
             }
         }
 
-        public IEnumerable<string> PerformPost(string username, string data) {
+        public IList<string> PerformPost(string username, string data) {
             CreateUser(username);
             var user = GetUser(username);
             IUserService userService = new UserService(user);
@@ -59,7 +59,7 @@ namespace CoduranceTwitter.Core {
             return new List<string>();
         }
 
-        public IEnumerable<string> PerformFollow(string username, string usernameToFollow) {
+        public IList<string> PerformFollow(string username, string usernameToFollow) {
             var user = GetUser(username);
             if (user == null)
                 throw new ArgumentException("User does not exist!");
@@ -73,6 +73,22 @@ namespace CoduranceTwitter.Core {
 
             // just return an empty string
             return new List<string>();
+        }
+
+        public IList<string> PerformRead(string username) {
+            var user = GetUser(username);
+            if (user == null)
+                throw new ArgumentException("User does not exists!");
+
+            var userService = new UserService(user);
+            var tweets = userService.GetTweetList();
+
+            var returnList = new List<string>();
+            foreach (var tweet in tweets) {
+                returnList.Add(tweet.TweetText);
+            }
+
+            return returnList;
         }
 
         public void CreateUser(string username) {

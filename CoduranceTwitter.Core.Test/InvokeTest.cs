@@ -28,5 +28,6 @@ namespace CoduranceTwitter.Core.Test {
             var userTweets = _receiver.GetUserTweets(username);
             Assert.Equal(data, userTweets[userTweets.Count - 1].TweetText);
         }
+
     }
 }

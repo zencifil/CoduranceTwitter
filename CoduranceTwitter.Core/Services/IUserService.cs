@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using CoduranceTwitter.Core.Models;
 
 namespace CoduranceTwitter.Core.Services {
@@ -7,5 +8,6 @@ namespace CoduranceTwitter.Core.Services {
 
         void AddTweet(ITweet tweet);
         void AddFollowing(IUser user);
+        IList<ITweet> GetTweetList();
     }
 }

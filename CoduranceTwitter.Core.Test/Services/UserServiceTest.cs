@@ -8,7 +8,7 @@ namespace CoduranceTwitter.Core.Test.Services {
     public class UserServiceTest {
 
         [Fact]
-        public void AddTweetShouldAddTweetToList() {
+        public void AddTweet_ShouldAddTweetToList() {
 			var username = "serviceUser";
             var user = new User(username);
             var userService = new UserService(user);
@@ -22,7 +22,7 @@ namespace CoduranceTwitter.Core.Test.Services {
         }
 
         [Fact]
-        public void AddFollowingShouldAddUserToList() {
+        public void AddFollowing_ShouldAddUserToList() {
             var username = "firstUser";
             var user = new User(username);
             var userService = new UserService(user);
@@ -33,6 +33,20 @@ namespace CoduranceTwitter.Core.Test.Services {
             userService.AddFollowing(userToFollow);
 
             Assert.Equal(usernameToFollow, user.Following[user.Following.Count - 1].Username);
+        }
+
+        [Fact]
+        public void GetTweets_ShouldReturnTweetList() {
+            var username = "serviceUser";
+            var user = new User(username);
+            var userService = new UserService(user);
+
+            var tweet1 = new Tweet("Hi, this is my first tweet.");
+            var tweet2 = new Tweet("Hi, this is my second tweet.");
+            userService.AddTweet(tweet1);
+            userService.AddTweet(tweet2);
+
+            Assert.Equal(2, userService.GetTweetList().Count);
         }
     }
 }

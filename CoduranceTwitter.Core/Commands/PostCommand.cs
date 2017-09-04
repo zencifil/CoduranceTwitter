@@ -12,7 +12,7 @@ namespace CoduranceTwitter.Core.Commands {
             this._receiver = receiver;
         }
 
-        public IEnumerable<string> Execute(string username, string data) {
+        public IList<string> Execute(string username, string data) {
             return this._receiver.PerformPost(username, data);
         }
     }

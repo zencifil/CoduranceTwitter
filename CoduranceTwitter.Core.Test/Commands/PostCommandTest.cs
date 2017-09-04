@@ -17,7 +17,7 @@ namespace CoduranceTwitter.Core.Test.Commands {
 
         [Fact]
         public void PostCommandPostsATweet() {
-            var username = "savas";
+            var username = "PostCommandUser";
             var tweetText = "hello twitter, this is my first tweet...";
             var postCommand = new PostCommand(_receiver);
             postCommand.Execute(username, tweetText);
