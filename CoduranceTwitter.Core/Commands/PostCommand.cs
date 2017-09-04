@@ -12,8 +12,8 @@ namespace CoduranceTwitter.Core.Commands {
             this._receiver = receiver;
         }
 
-        public IEnumerable Execute() {
-            return null;
+        public IEnumerable<string> Execute(string username, string data) {
+            return this._receiver.PerformPost(username, data);
         }
     }
 }

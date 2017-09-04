@@ -8,9 +8,9 @@ namespace CoduranceTwitter.Core {
 
         private ICommand _command;
 
-        public IEnumerable ExecuteCommand(ICommand command) {
+        public IEnumerable ExecuteCommand(ICommand command, string username, string data) {
             this._command = command;
-            return this._command.Execute();
+            return this._command.Execute(username, data);
         }
     }
 }

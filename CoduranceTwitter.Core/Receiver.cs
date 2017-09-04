@@ -48,10 +48,11 @@ namespace CoduranceTwitter.Core {
             }
         }
 
-        public IEnumerable PerformPost(string username, Models.ITweet tweet) {
+        public IEnumerable<string> PerformPost(string username, string data) {
             CreateUser(username);
             var user = GetUser(username);
             IUserService userService = new UserService(user);
+            ITweet tweet = new Tweet(data);
             userService.AddTweet(tweet);
 
             return new List<string>();

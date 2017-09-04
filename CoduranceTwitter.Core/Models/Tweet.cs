@@ -10,8 +10,8 @@ namespace CoduranceTwitter.Core.Models {
             this._sendDate = DateTime.Now;
         }
 
-        public string TweetText => throw new NotImplementedException();
+        public string TweetText => this._tweetText;
 
-        public DateTime SendDate => throw new NotImplementedException();
+        public DateTime SendDate => this._sendDate;
     }
 }

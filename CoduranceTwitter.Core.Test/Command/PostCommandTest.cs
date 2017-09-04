@@ -20,10 +20,10 @@ namespace CoduranceTwitter.Core.Test.Command {
             var username = "savas";
             var tweetText = "hello twitter, this is my first tweet...";
             ICommand postCommand = new PostCommand(_receiver);
-            postCommand.Execute();
-            var actual = _receiver.GetUser(username);
+            postCommand.Execute(username, tweetText);
+            var user = _receiver.GetUser(username);
 
-
+            Assert.Equal(tweetText, user.Tweets[user.Tweets.Count - 1].TweetText);
         }
         
 

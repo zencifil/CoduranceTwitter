@@ -34,8 +34,8 @@ namespace CoduranceTwitter.Core.Test {
 		[Fact]
 		public void WhenTweetsForFirstTime_ShouldCreateUser() {
 			var username = "firstTimeUser";
-            var tweet = new Models.Tweet("this is my first tweet.");
-            _receiver.PerformPost(username, tweet);
+            var tweetText = "this is my first tweet.";
+            _receiver.PerformPost(username, tweetText);
             var user = _receiver.GetUser(username);
 
             Assert.Equal(username, user.Username);
