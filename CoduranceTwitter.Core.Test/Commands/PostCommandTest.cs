@@ -2,7 +2,7 @@ using System;
 using CoduranceTwitter.Core.Commands;
 using Xunit;
 
-namespace CoduranceTwitter.Core.Test.Command {
+namespace CoduranceTwitter.Core.Test.Commands {
     
     public class CommandTest {
 

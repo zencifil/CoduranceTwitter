@@ -13,8 +13,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Command\" />
-    <Folder Include="Command\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Commands\" />
+    <Folder Include="Services\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoduranceTwitter.Core\CoduranceTwitter.Core.csproj" />
