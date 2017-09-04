@@ -9,16 +9,21 @@ namespace CoduranceTwitter.Core.Services {
         private IUser _user;
         
         public UserService(IUser user) {
-            _user = user;
+            this._user = user;
         }
 
         public void AddTweet(ITweet tweet) {
-            if (_user.Tweets == null)
-                _user.Tweets = new List<ITweet>();
+            if (this._user.Tweets == null)
+                this._user.Tweets = new List<ITweet>();
 
-            _user.Tweets.Add(tweet);
+            this._user.Tweets.Add(tweet);
         }
 
+        public void AddFollowing(IUser user) {
+            if (this._user.Following == null)
+                this._user.Following = new List<IUser>();
 
+            this._user.Following.Add(user);
+        }
     }
 }

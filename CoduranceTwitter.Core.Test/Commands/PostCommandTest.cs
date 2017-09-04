@@ -4,11 +4,11 @@ using Xunit;
 
 namespace CoduranceTwitter.Core.Test.Commands {
     
-    public class CommandTest {
+    public class PostCommandTest {
 
         private Receiver _receiver;
 
-        public CommandTest() {
+        public PostCommandTest() {
             if (_receiver != null)
                 _receiver.Dispose();
             
@@ -19,7 +19,7 @@ namespace CoduranceTwitter.Core.Test.Commands {
         public void PostCommandPostsATweet() {
             var username = "savas";
             var tweetText = "hello twitter, this is my first tweet...";
-            ICommand postCommand = new PostCommand(_receiver);
+            var postCommand = new PostCommand(_receiver);
             postCommand.Execute(username, tweetText);
             var user = _receiver.GetUser(username);
 

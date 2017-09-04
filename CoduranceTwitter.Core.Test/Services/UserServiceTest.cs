@@ -20,5 +20,19 @@ namespace CoduranceTwitter.Core.Test.Services {
 
 			Assert.Equal(tweetText, user.Tweets[user.Tweets.Count - 1].TweetText);
         }
+
+        [Fact]
+        public void AddFollowingShouldAddUserToList() {
+            var username = "firstUser";
+            var user = new User(username);
+            var userService = new UserService(user);
+
+            var usernameToFollow = "user2follow";
+            var userToFollow = new User(usernameToFollow);
+
+            userService.AddFollowing(userToFollow);
+
+            Assert.Equal(usernameToFollow, user.Following[user.Following.Count - 1].Username);
+        }
     }
 }

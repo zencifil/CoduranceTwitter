@@ -1,4 +1,5 @@
 ﻿using System;
+using CoduranceTwitter.Core.Models;
 using Xunit;
 
 namespace CoduranceTwitter.Core.Test {
@@ -40,5 +41,13 @@ namespace CoduranceTwitter.Core.Test {
 
             Assert.Equal(username, user.Username);
 		}
+
+        [Fact]
+        public void WhenPerformFollowCalledWithNonExistingUsername_ShouldThrowException() {
+			var username = "savas";
+			var usernameToFollow = "ThisUserIsNotExist";
+
+			Assert.Throws<ArgumentException>(() => _receiver.PerformFollow(username, usernameToFollow));
+        }
     }
 }

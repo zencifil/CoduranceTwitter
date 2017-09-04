@@ -8,7 +8,7 @@ namespace CoduranceTwitter.Core {
     
     public sealed class Receiver {
 
-        private bool _disposed = false;
+        private bool _disposed;
         private static volatile Receiver _receiver;
         private static readonly object _syncLock = new object();
 
@@ -55,6 +55,23 @@ namespace CoduranceTwitter.Core {
             ITweet tweet = new Tweet(data);
             userService.AddTweet(tweet);
 
+            // might return actual post but for now just an empty list.
+            return new List<string>();
+        }
+
+        public IEnumerable<string> PerformFollow(string username, string usernameToFollow) {
+            var user = GetUser(username);
+            if (user == null)
+                throw new ArgumentException("User does not exist!");
+
+            var userToFollow = GetUser(usernameToFollow);
+            if (userToFollow == null)
+                throw new ArgumentException("The user you're trying to follow does not exist!");
+
+            IUserService userService = new UserService(user);
+            userService.AddFollowing(userToFollow);
+
+            // just return an empty string
             return new List<string>();
         }
 
