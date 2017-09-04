@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using CoduranceTwitter.Core.Models;
+using CoduranceTwitter.Core.Services;
 
 namespace CoduranceTwitter.Core {
     
@@ -10,10 +12,10 @@ namespace CoduranceTwitter.Core {
         private static volatile Receiver _receiver;
         private static readonly object _syncLock = new object();
 
-        private List<Models.IUser> _users;
+        private List<IUser> _users;
 
         private Receiver() {
-            _users = new List<Models.IUser>();
+            _users = new List<IUser>();
         }
 
         public static Receiver Instance {
@@ -49,8 +51,8 @@ namespace CoduranceTwitter.Core {
         public IEnumerable PerformPost(string username, Models.ITweet tweet) {
             CreateUser(username);
             var user = GetUser(username);
-            IUser userController = new User(user);
-            userController.AddTweet(tweet);
+            IUserService userService = new UserService(user);
+            userService.AddTweet(tweet);
 
             return new List<string>();
         }
@@ -61,7 +63,7 @@ namespace CoduranceTwitter.Core {
                 this._users.Add(new Models.User(username));
         }
 
-        public Models.IUser GetUser(string username) {
+        public IUser GetUser(string username) {
             return this._users.Find(u => u.Username == username);
         }
 
