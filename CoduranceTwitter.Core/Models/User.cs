@@ -4,16 +4,16 @@ using System.Collections.Generic;
 
 namespace CoduranceTwitter.Core.Models {
     
-    public class User : IUser {
+    public class User : IEntity {
 
         private string _username;
-        private IList<Models.ITweet> _tweets;
-        private IList<Models.IUser> _following;
+        private IList<Tweet> _tweets;
+        private IList<User> _following;
 
         public User(string username) {
             this._username = username;
-            this._tweets = new List<Models.ITweet>();
-            this._following = new List<Models.IUser>();
+            this._tweets = new List<Tweet>();
+            this._following = new List<User>();
         }
 
         public string Username {
@@ -25,7 +25,7 @@ namespace CoduranceTwitter.Core.Models {
             }
         }
 
-        public IList<Models.ITweet> Tweets {
+        public IList<Tweet> Tweets {
             get {
                 return _tweets;
             }
@@ -34,7 +34,7 @@ namespace CoduranceTwitter.Core.Models {
             }
         }
 
-        public IList<Models.IUser> Following {
+        public IList<User> Following {
             get {
                 return _following;
             }

@@ -1,6 +1,6 @@
 ﻿using System;
 namespace CoduranceTwitter.Core.Models {
-    public class Tweet : ITweet {
+    public class Tweet : IEntity {
 
         private string _tweetText;
         private DateTime _sendDate;

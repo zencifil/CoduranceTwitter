@@ -12,10 +12,10 @@ namespace CoduranceTwitter.Core {
         private static volatile Receiver _receiver;
         private static readonly object _syncLock = new object();
 
-        private List<IUser> _users;
+        private List<User> _users;
 
         private Receiver() {
-            _users = new List<IUser>();
+            _users = new List<User>();
         }
 
         public static Receiver Instance {
@@ -51,8 +51,8 @@ namespace CoduranceTwitter.Core {
         public IList<string> PerformPost(string username, string data) {
             CreateUser(username);
             var user = GetUser(username);
-            IUserService userService = new UserService(user);
-            ITweet tweet = new Tweet(data);
+            var userService = new UserService(user);
+            var tweet = new Tweet(data);
             userService.AddTweet(tweet);
 
             // might return actual post but for now just an empty list.
@@ -94,18 +94,18 @@ namespace CoduranceTwitter.Core {
         public void CreateUser(string username) {
             var user = GetUser(username);
             if (user == null)
-                this._users.Add(new Models.User(username));
+                this._users.Add(new User(username));
         }
 
-        public IUser GetUser(string username) {
+        public User GetUser(string username) {
             return this._users.Find(u => u.Username == username);
         }
 
-        public List<Models.ITweet> GetUserTweets(string username) {
-            List<Models.ITweet> tweetList = new List<Models.ITweet>();
+        public List<Tweet> GetUserTweets(string username) {
+            var tweetList = new List<Tweet>();
             var tweets = this._users.Find(u => u.Username == username).Tweets;
             foreach (var tweet in tweets) {
-                tweetList.Add((Models.ITweet)tweet);
+                tweetList.Add((Tweet)tweet);
             }
 
             return tweetList;
