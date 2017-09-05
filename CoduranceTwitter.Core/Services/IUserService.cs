@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+
 using CoduranceTwitter.Core.Models;
 
 namespace CoduranceTwitter.Core.Services {

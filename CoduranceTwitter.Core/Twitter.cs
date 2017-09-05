@@ -1,7 +1,7 @@
-﻿using CoduranceTwitter.Core.Commands;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Text;
+
+using CoduranceTwitter.Core.Commands;
 
 namespace CoduranceTwitter.Core {
 

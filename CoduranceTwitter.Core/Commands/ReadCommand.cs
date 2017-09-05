@@ -4,10 +4,10 @@ namespace CoduranceTwitter.Core.Commands {
 
     public class ReadCommand : ICommand {
 
-        private Receiver _receiver;
+        Receiver _receiver;
 
         public ReadCommand(Receiver receiver) {
-            this._receiver = receiver;
+            _receiver = receiver;
         }
 
         public IList<string> Execute(string username, string data) {

@@ -1,6 +1,6 @@
-﻿using System.Collections;
+﻿using System.Collections.Generic;
+
 using CoduranceTwitter.Core.Commands;
-using System.Collections.Generic;
 
 namespace CoduranceTwitter.Core {
 

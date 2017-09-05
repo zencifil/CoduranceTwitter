@@ -1,14 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+
+using Moq;
+using Xunit;
+
 using CoduranceTwitter.Core.Commands;
 using CoduranceTwitter.Core.Models;
 using CoduranceTwitter.Core.Repository;
 using CoduranceTwitter.Core.Services;
-using Moq;
-using Xunit;
 
 namespace CoduranceTwitter.Core.Test.Commands {
-    
+
     public class WallCommandTest {
         
         [Fact]

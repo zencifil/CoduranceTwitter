@@ -1,8 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CoduranceTwitter.Core.Commands {
-    
+
     public class WallCommand : ICommand {
 
         Receiver _receiver;

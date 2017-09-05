@@ -1,7 +1,7 @@
-﻿using Microsoft.Extensions.DependencyInjection;
-
-using System;
+﻿using System;
 using System.Linq;
+
+using Microsoft.Extensions.DependencyInjection;
 
 using CoduranceTwitter.Core;
 using CoduranceTwitter.Core.Repository;
@@ -19,6 +19,7 @@ namespace CoduranceTwitter.UI {
 
             using (var twitter = provider.GetService<Twitter>()) {
                 while (true) {
+                    Console.Write(">");
                     var line = Console.ReadLine();
                     if (line == "quit")
                         break;

@@ -37,7 +37,7 @@ namespace CoduranceTwitter.Core.Test.Services {
             _userService = new UserService(userRepo.Object);
         }
 
-        /*
+        /* Couldn't make this work! Further research is needed.
         [Fact]
         public void WhenUserNotExists_PostTweet_ShouldCreateAUser() {
 			var username = "NonExistingUser";
