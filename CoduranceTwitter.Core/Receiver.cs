@@ -36,5 +36,9 @@ namespace CoduranceTwitter.Core {
             return returnList;
         }
 
+        public IList<string> PerformWall(string username) {
+            return _userService.GetWall(username);
+        }
+
     }
 }
