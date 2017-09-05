@@ -8,9 +8,6 @@ namespace CoduranceTwitter.Core.Services {
     
     public class UserService : IUserService {
 
-        static volatile UserService _userService;
-        static readonly object _syncLock = new object();
-
         IRepository<User> _userRepository;
         
         public UserService(IRepository<User> userRepository) {

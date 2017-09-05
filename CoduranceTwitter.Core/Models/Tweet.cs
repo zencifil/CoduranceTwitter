@@ -1,17 +1,19 @@
 ﻿using System;
+
 namespace CoduranceTwitter.Core.Models {
+    
     public class Tweet : IEntity {
 
-        private string _tweetText;
-        private DateTime _sendDate;
+        string _tweetText;
+        DateTime _sendDate;
 
         public Tweet(string tweetText) {
-            this._tweetText = tweetText;
-            this._sendDate = DateTime.Now;
+            _tweetText = tweetText;
+            _sendDate = DateTime.Now;
         }
 
-        public string TweetText => this._tweetText;
+        public string TweetText => _tweetText;
 
-        public DateTime SendDate => this._sendDate;
+        public DateTime SendDate => _sendDate;
     }
 }

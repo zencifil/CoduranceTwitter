@@ -1,18 +1,17 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CoduranceTwitter.Core.Commands {
     
     public class FollowCommand : ICommand {
 
-        private Receiver _receiver;
+        Receiver _receiver;
         
         public FollowCommand(Receiver receiver) {
-            this._receiver = receiver;
+            _receiver = receiver;
         }
 
         public IList<string> Execute(string username, string data) {
-            return this._receiver.PerformFollow(username, data);
+            return _receiver.PerformFollow(username, data);
         }
     }
 }

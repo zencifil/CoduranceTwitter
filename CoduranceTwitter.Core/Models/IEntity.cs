@@ -1,5 +1,5 @@
-﻿using System;
-namespace CoduranceTwitter.Core.Models {
+﻿namespace CoduranceTwitter.Core.Models {
+    
     public interface IEntity {
     }
 }

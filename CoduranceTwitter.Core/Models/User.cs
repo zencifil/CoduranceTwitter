@@ -1,19 +1,17 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace CoduranceTwitter.Core.Models {
-    
+
     public class User : IEntity {
 
-        private string _username;
-        private IList<Tweet> _tweets;
-        private IList<User> _following;
+        string _username;
+        IList<Tweet> _tweets;
+        IList<User> _following;
 
         public User(string username) {
-            this._username = username;
-            this._tweets = new List<Tweet>();
-            this._following = new List<User>();
+            _username = username;
+            _tweets = new List<Tweet>();
+            _following = new List<User>();
         }
 
         public string Username {
@@ -42,7 +40,6 @@ namespace CoduranceTwitter.Core.Models {
                 _following = value;
             }
         }
-
 
     }
 }

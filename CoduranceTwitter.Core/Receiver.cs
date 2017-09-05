@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using CoduranceTwitter.Core.Models;
-using CoduranceTwitter.Core.Repository;
+﻿using System.Collections.Generic;
 using CoduranceTwitter.Core.Services;
 
 namespace CoduranceTwitter.Core {
 
-    // After the structure change, this class looks like redundant... 
     public class Receiver {
 
         IUserService _userService;

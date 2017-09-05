@@ -1,4 +1,3 @@
-using System;
 using CoduranceTwitter.Core.Commands;
 using CoduranceTwitter.Core.Models;
 using CoduranceTwitter.Core.Repository;
@@ -7,7 +6,7 @@ using Moq;
 using Xunit;
 
 namespace CoduranceTwitter.Core.Test.Commands {
-    
+
     public class PostCommandTest {
 
         [Fact]

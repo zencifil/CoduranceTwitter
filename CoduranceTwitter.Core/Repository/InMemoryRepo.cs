@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
 using System.Collections.Generic;
 using CoduranceTwitter.Core.Models;
 
 namespace CoduranceTwitter.Core.Repository {
-    
+
     public class InMemoryRepo<T> : IRepository<T> where T : IEntity {
         
         ConcurrentBag<T> _entities;
@@ -18,10 +17,6 @@ namespace CoduranceTwitter.Core.Repository {
         public void Add(T entity) {
             _entities.Add(entity);
         }
-
-        //public void Delete(T entity) {
-        //    throw new NotImplementedException();
-        //}
 
         public void Save(T entity) {
             

@@ -18,7 +18,6 @@ namespace CoduranceTwitter.Core.Test.Services {
             var username = "ExistingUser";
             var user = new User(username);
             userRepo.Object.Add(user);
-            userRepo.Object.Save(user);
 
             _userService = new UserService(userRepo.Object);
         }

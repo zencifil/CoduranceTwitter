@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using CoduranceTwitter.Core.Models;
 
 namespace CoduranceTwitter.Core.Services {
-    
+
     public interface IUserService {
 
         void PostTweet(string username, string tweetText);
