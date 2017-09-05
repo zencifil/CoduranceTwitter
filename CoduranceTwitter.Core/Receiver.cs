@@ -27,8 +27,8 @@ namespace CoduranceTwitter.Core {
 
         public IList<string> PerformRead(string username) {
             var tweets = _userService.GetTweetList(username);
-
             var returnList = new List<string>();
+
             foreach (var tweet in tweets) {
                 returnList.Add(tweet.TweetText);
             }

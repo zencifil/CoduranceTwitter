@@ -20,35 +20,43 @@ namespace CoduranceTwitter.Core.Test {
         }
 
         [Fact]
-        public void GetCommand_ShouldReturnProperCommandForPost() {
+        public void ParseCommand_ShouldReturnProperCommandForPost() {
             var commandText = "user -> tweet";
-            var command = _twitter.GetCommand(commandText);
+            var command = _twitter.ParseCommand(commandText);
 
-            Assert.IsType<PostCommand>(command);
+            Assert.IsType<PostCommand>(command.Command);
         }
 
         [Fact]
-        public void GetCommand_ShouldReturnProperCommandForRead() {
+        public void ParseCommand_ShouldReturnProperCommandForRead() {
             var commandText = "user";
-            var command = _twitter.GetCommand(commandText);
+            var command = _twitter.ParseCommand(commandText);
 
-            Assert.IsType<ReadCommand>(command);
+            Assert.IsType<ReadCommand>(command.Command);
         }
 
         [Fact]
-        public void GetCommand_ShouldReturnProperCommandForFollow() {
+        public void ParseCommand_ShouldReturnProperCommandForFollow() {
             var commandText = "user follows anotherUser";
-            var command = _twitter.GetCommand(commandText);
+            var command = _twitter.ParseCommand(commandText);
 
-            Assert.IsType<FollowCommand>(command);
+            Assert.IsType<FollowCommand>(command.Command);
         }
 
         [Fact]
-        public void GetCommand_ShouldReturnProperCommandForWall() {
+        public void ParseCommand_ShouldReturnProperCommandForWall() {
             var commandText = "user wall";
-            var command = _twitter.GetCommand(commandText);
+            var command = _twitter.ParseCommand(commandText);
 
-            Assert.IsType<WallCommand>(command);
+            Assert.IsType<WallCommand>(command.Command);
+        }
+
+        [Fact]
+        public void WhenPostGivenToExecute_ShouldReturnEmptyString() {
+            var commandText = "user -> tweet";
+            var actual = _twitter.Execute(commandText);
+
+            Assert.Equal(0, actual.Count);
         }
     }
 }

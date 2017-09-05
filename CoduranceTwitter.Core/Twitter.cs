@@ -14,25 +14,27 @@ namespace CoduranceTwitter.Core {
             _receiver = receiver;
         }
 
-        public string Execute(string commandText) {
-            var command = GetCommand(commandText);
+        public IList<string> Execute(string commandText) {
             var invoke = new Invoke();
-
-            return "";
+            var command = ParseCommand(commandText);
+            return invoke.ExecuteCommand(command);
         }
 
-        public ICommand GetCommand(string commandText) {
+        public CommandInput ParseCommand(string commandText) {
+            CommandInput commandInput;
             var textArray = commandText.Split(" ", 3, StringSplitOptions.RemoveEmptyEntries);
             if (textArray.Length == 1)
-                return new ReadCommand(_receiver);
+                commandInput = new CommandInput(new ReadCommand(_receiver), textArray[0], string.Empty);
             else if (textArray.Length == 2)
-                return new WallCommand(_receiver);
+                commandInput = new CommandInput(new WallCommand(_receiver), textArray[0], string.Empty);
             else if (textArray.Length == 3 && textArray[1] == "follows")
-                return new FollowCommand(_receiver);
+                commandInput = new CommandInput(new FollowCommand(_receiver), textArray[0], textArray[2]);
             else if (textArray.Length == 3 && textArray[1] == "->")
-                return new PostCommand(_receiver);
+                commandInput = new CommandInput(new PostCommand(_receiver), textArray[0], textArray[2]);
             else
                 throw new ArgumentException("Unrecognized command!");
+
+            return commandInput;
         }
 
         public void Dispose() {

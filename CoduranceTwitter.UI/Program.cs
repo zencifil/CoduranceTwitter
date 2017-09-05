@@ -1,5 +1,8 @@
-﻿using System;
-using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.DependencyInjection;
+
+using System;
+using System.Linq;
+
 using CoduranceTwitter.Core;
 using CoduranceTwitter.Core.Repository;
 using CoduranceTwitter.Core.Models;
@@ -15,12 +18,18 @@ namespace CoduranceTwitter.UI {
             var provider = GetServiceProvider();
 
             using (var twitter = provider.GetService<Twitter>()) {
-                while(true) {
+                while (true) {
                     var line = Console.ReadLine();
                     if (line == "quit")
                         break;
-                    var result = twitter.Execute(line);
-                    Console.WriteLine(result);
+
+                    try {
+                        var result = twitter.Execute(line);
+                        result.ToList().ForEach(r => Console.WriteLine(r));
+                    }
+                    catch (Exception ex) {
+                        Console.WriteLine(ex.Message);
+                    }
                 }
             }
         }
@@ -29,8 +38,6 @@ namespace CoduranceTwitter.UI {
             var services = new ServiceCollection();
             services.AddTransient<Twitter>();
             services.AddTransient<Receiver>();
-            //services.AddTransient(typeof(IEntity), typeof(User));
-            //services.AddTransient(typeof(IEntity), typeof(Tweet));
             services.AddTransient(typeof(IUserService), typeof(UserService));
             services.AddTransient(typeof(IRepository<User>), typeof(InMemoryRepo<User>));
 
