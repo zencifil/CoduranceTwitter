@@ -70,7 +70,18 @@ namespace CoduranceTwitter.Core.Services {
             if (user == null)
                 throw new ArgumentException("User does not exist!");
 
-            return null;
+            var tweets = user.Tweets.Select(t => new { user.Username, Tweet = t }).ToList();
+
+			foreach (var u in user.Following) {
+				foreach (var t in u.Tweets) {
+                    tweets.Add(new { u.Username, Tweet = t });
+				}
+			}
+
+            return tweets.OrderByDescending(a => a.Tweet.SendDate)
+                         .Select(a => $"{a.Username} - {a.Tweet.TweetText}")
+                         .ToList();
         }
+
     }
 }

@@ -37,21 +37,23 @@ namespace CoduranceTwitter.Core.Test.Services {
             _userService = new UserService(userRepo.Object);
         }
 
-   //     [Fact]
-   //     public void WhenUserNotExists_PostTweet_ShouldCreateAUser() {
-			//var username = "NonExistingUser";
-			//var tweetText = "This tweet is sent by service.";
+        /*
+        [Fact]
+        public void WhenUserNotExists_PostTweet_ShouldCreateAUser() {
+			var username = "NonExistingUser";
+			var tweetText = "This tweet is sent by service.";
 
-        //    var userServiceMock = new Mock<IUserService>();
-        //    userServiceMock.SetupSequence(u => u.GetUser(It.IsAny<string>()))
-        //                   .Returns(new User(username));
-        //    userServiceMock.Setup(u => u.RegisterUser(It.Is<string>(s => s == username)))
-        //                   .Verifiable();
+            var userServiceMock = new Mock<IUserService>();
+            userServiceMock.SetupSequence(u => u.GetUser(It.IsAny<string>()))
+                           .Returns(new User(username));
+            userServiceMock.Setup(u => u.RegisterUser(It.Is<string>(s => s == username)))
+                           .Verifiable();
 
-        //    userServiceMock.Object.PostTweet(username, tweetText);
+            userServiceMock.Object.PostTweet(username, tweetText);
 
-        //    userServiceMock.Verify();
-        //}
+            userServiceMock.Verify();
+        }
+        */
 
         [Fact]
         public void WhenUserNotExist_FollowUser_ShouldThrowException() {
@@ -83,5 +85,13 @@ namespace CoduranceTwitter.Core.Test.Services {
             Assert.Throws(typeof(ArgumentException), () => { _userService.GetWall(username); });
         }
 
+        [Fact]
+        public void Wall_ShouldReturnTweetList() {
+            var username = "ExistingUser";
+
+            var actual = _userService.GetWall(username);
+
+            Assert.Equal(2, actual.Count);
+        }
     }
 }
