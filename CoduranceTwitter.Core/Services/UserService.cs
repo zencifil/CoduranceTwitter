@@ -17,8 +17,10 @@ namespace CoduranceTwitter.Core.Services {
         public void PostTweet(string username, string tweetText) {
             var user = GetUser(username);
 
-            if (user == null)
-                user = new User(username);
+            if (user == null) {
+                RegisterUser(username);
+                user = GetUser(username);
+            }
 
             if (user.Tweets == null)
                 user.Tweets = new List<Tweet>();
@@ -53,5 +55,22 @@ namespace CoduranceTwitter.Core.Services {
             return _userRepository.Entities.FirstOrDefault(u => u.Username == username);
         }
 
+        public void RegisterUser(string username) {
+            var user = GetUser(username);
+
+            if (user != null)
+                throw new Exception("User already exists!");
+
+            _userRepository.Add(new User(username));
+        }
+
+        public IList<string> GetWall(string username) {
+            var user = GetUser(username);
+
+            if (user == null)
+                throw new ArgumentException("User does not exist!");
+
+            return null;
+        }
     }
 }
