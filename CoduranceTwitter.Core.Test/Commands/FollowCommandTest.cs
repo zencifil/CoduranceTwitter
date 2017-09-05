@@ -1,33 +1,34 @@
 ﻿using System;
 using CoduranceTwitter.Core.Commands;
 using CoduranceTwitter.Core.Models;
+using CoduranceTwitter.Core.Repository;
+using CoduranceTwitter.Core.Services;
+using Moq;
 using Xunit;
 
 namespace CoduranceTwitter.Core.Test.Commands {
     
     public class FollowCommandTest {
 
-        private Receiver _receiver;
-        
-        public FollowCommandTest() {
-			if (_receiver != null)
-				_receiver.Dispose();
-
-			_receiver = Receiver.Instance;
-        }
-
         [Fact]
         public void FollowCommandShouldFollowThatUser() {
-            var username = "savas";
+			var userRepo = new Mock<InMemoryRepo<User>>();
+
+			var username = "ExistingUser";
+			var user = new User(username);
+			userRepo.Object.Add(user);
+
             var usernameToFollow = "FollowMe";
+            var userToFollow = new User(usernameToFollow);
+            userRepo.Object.Add(userToFollow);
 
-            _receiver.CreateUser(username);
-            _receiver.CreateUser(usernameToFollow);
+            userRepo.Object.Save(user);
 
-            var followCommand = new FollowCommand(_receiver);
+			var userService = new UserService(userRepo.Object);
+
+            var followCommand = new FollowCommand(new Receiver(userService));
             followCommand.Execute(username, usernameToFollow);
 
-            var user = _receiver.GetUser(username);
             var isFollowing = false;
             foreach (var following in user.Following) {
                 if (following.Username == usernameToFollow) {

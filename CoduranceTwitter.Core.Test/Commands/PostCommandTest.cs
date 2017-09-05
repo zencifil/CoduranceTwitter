@@ -1,32 +1,32 @@
 using System;
 using CoduranceTwitter.Core.Commands;
+using CoduranceTwitter.Core.Models;
+using CoduranceTwitter.Core.Repository;
+using CoduranceTwitter.Core.Services;
+using Moq;
 using Xunit;
 
 namespace CoduranceTwitter.Core.Test.Commands {
     
     public class PostCommandTest {
 
-        private Receiver _receiver;
-
-        public PostCommandTest() {
-            if (_receiver != null)
-                _receiver.Dispose();
-            
-            _receiver = Receiver.Instance;
-        }
-
         [Fact]
         public void PostCommandPostsATweet() {
-            var username = "PostCommandUser";
+			var userRepo = new Mock<InMemoryRepo<User>>();
+
+			var username = "ExistingUser";
+			var user = new User(username);
+			userRepo.Object.Add(user);
+			userRepo.Object.Save(user);
+
+			var userService = new UserService(userRepo.Object);
+
             var tweetText = "hello twitter, this is my first tweet...";
-            var postCommand = new PostCommand(_receiver);
+            var postCommand = new PostCommand(new Receiver(userService));
             postCommand.Execute(username, tweetText);
-            var user = _receiver.GetUser(username);
 
             Assert.Equal(tweetText, user.Tweets[user.Tweets.Count - 1].TweetText);
         }
-        
-
 
     }
 }

@@ -2,86 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using CoduranceTwitter.Core.Models;
+using CoduranceTwitter.Core.Repository;
 using CoduranceTwitter.Core.Services;
 
 namespace CoduranceTwitter.Core {
-    
-    public sealed class Receiver {
 
-        private bool _disposed;
-        private static volatile Receiver _receiver;
-        private static readonly object _syncLock = new object();
+    // After the structure change, this class looks like redundant... 
+    public class Receiver {
 
-        private List<User> _users;
+        IUserService _userService;
 
-        private Receiver() {
-            _users = new List<User>();
-        }
-
-        public static Receiver Instance {
-            get {
-                if (_receiver != null)
-                    return _receiver;
-
-                lock (_syncLock) {
-                    if (_receiver == null)
-                        _receiver = new Receiver();
-                }
-
-                return _receiver;
-            }
-        }
-
-        public void Dispose() {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        private void Dispose(bool disposing) {
-            if (_disposed)
-                return;
-
-            if (disposing) {
-                _receiver = null;
-                _users = null;
-                _disposed = true;
-            }
+        public Receiver(IUserService userService) {
+            _userService = userService;
         }
 
         public IList<string> PerformPost(string username, string data) {
-            CreateUser(username);
-            var user = GetUser(username);
-            var userService = new UserService(user);
-            var tweet = new Tweet(data);
-            userService.AddTweet(tweet);
+            _userService.PostTweet(username, data);
 
             // might return actual post but for now just an empty list.
             return new List<string>();
         }
 
         public IList<string> PerformFollow(string username, string usernameToFollow) {
-            var user = GetUser(username);
-            if (user == null)
-                throw new ArgumentException("User does not exist!");
+            _userService.FollowUser(username, usernameToFollow);
 
-            var userToFollow = GetUser(usernameToFollow);
-            if (userToFollow == null)
-                throw new ArgumentException("The user you're trying to follow does not exist!");
-
-            IUserService userService = new UserService(user);
-            userService.AddFollowing(userToFollow);
-
-            // just return an empty string
+            // just return an empty string same as post
             return new List<string>();
         }
 
         public IList<string> PerformRead(string username) {
-            var user = GetUser(username);
-            if (user == null)
-                throw new ArgumentException("User does not exists!");
-
-            var userService = new UserService(user);
-            var tweets = userService.GetTweetList();
+            var tweets = _userService.GetTweetList(username);
 
             var returnList = new List<string>();
             foreach (var tweet in tweets) {
@@ -89,26 +39,6 @@ namespace CoduranceTwitter.Core {
             }
 
             return returnList;
-        }
-
-        public void CreateUser(string username) {
-            var user = GetUser(username);
-            if (user == null)
-                this._users.Add(new User(username));
-        }
-
-        public User GetUser(string username) {
-            return this._users.Find(u => u.Username == username);
-        }
-
-        public List<Tweet> GetUserTweets(string username) {
-            var tweetList = new List<Tweet>();
-            var tweets = this._users.Find(u => u.Username == username).Tweets;
-            foreach (var tweet in tweets) {
-                tweetList.Add((Tweet)tweet);
-            }
-
-            return tweetList;
         }
 
     }

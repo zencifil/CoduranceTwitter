@@ -1,29 +1,32 @@
 ﻿using System;
 using CoduranceTwitter.Core.Commands;
+using CoduranceTwitter.Core.Models;
+using CoduranceTwitter.Core.Repository;
+using CoduranceTwitter.Core.Services;
+using Moq;
 using Xunit;
 
 namespace CoduranceTwitter.Core.Test.Commands {
     
     public class ReadCommandTest {
 
-        private Receiver _receiver;
-
-        public ReadCommandTest() {
-			if (_receiver != null)
-				_receiver.Dispose();
-
-			_receiver = Receiver.Instance;
-        }
-
         [Fact]
         public void ReadCommandReturnsAListOfTweet() {
-            var username = "ReadCommandUser";
+			var userRepo = new Mock<InMemoryRepo<User>>();
+
+			var username = "ExistingUser";
+			var user = new User(username);
+			userRepo.Object.Add(user);
+			userRepo.Object.Save(user);
+
+			var userService = new UserService(userRepo.Object);
+
             var tweet1 = "This could be my first tweet.";
             var tweet2 = "And this could be my second...";
-            _receiver.PerformPost(username, tweet1);
-            _receiver.PerformPost(username, tweet2);
+            userService.PostTweet(username, tweet1);
+            userService.PostTweet(username, tweet2);
 
-            var readCommand = new ReadCommand(_receiver);
+            var readCommand = new ReadCommand(new Receiver(userService));
             var tweets = readCommand.Execute(username, string.Empty);
 
             Assert.Equal(2, tweets.Count);

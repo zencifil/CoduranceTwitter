@@ -1,33 +1,60 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using CoduranceTwitter.Core.Models;
+using CoduranceTwitter.Core.Repository;
 
 namespace CoduranceTwitter.Core.Services {
     
     public class UserService : IUserService {
 
-        private User _user;
+        static volatile UserService _userService;
+        static readonly object _syncLock = new object();
+
+        IRepository<User> _userRepository;
         
-        public UserService(User user) {
-            this._user = user;
+        public UserService(IRepository<User> userRepository) {
+            _userRepository = userRepository;
         }
 
-        public void AddTweet(Tweet tweet) {
-            if (this._user.Tweets == null)
-                this._user.Tweets = new List<Tweet>();
+        public void PostTweet(string username, string tweetText) {
+            var user = GetUser(username);
 
-            this._user.Tweets.Add(tweet);
+            if (user == null)
+                user = new User(username);
+
+            if (user.Tweets == null)
+                user.Tweets = new List<Tweet>();
+
+            user.Tweets.Add(new Tweet(tweetText));
         }
 
-        public void AddFollowing(User user) {
-            if (this._user.Following == null)
-                this._user.Following = new List<User>();
+        public void FollowUser(string username, string usernameToFollow) {
+            var user = GetUser(username);
+            if (user == null)
+                throw new ArgumentException("User does not exist!");
+            
+            var userToFollow = GetUser(usernameToFollow);
+            if (userToFollow == null)
+                throw new ArgumentException("The user you're trying to follow does not exist!");
 
-            this._user.Following.Add(user);
+            if (user.Following == null)
+                user.Following = new List<User>();
+
+            user.Following.Add(userToFollow);
         }
 
-        public IList<Tweet> GetTweetList() {
-            return this._user.Tweets;
+        public IList<Tweet> GetTweetList(string username) {
+            var user = GetUser(username);
+            if (user == null)
+                throw new ArgumentException("User does not exist!");
+            
+            return user.Tweets;
         }
+
+        public User GetUser(string username) {
+            return _userRepository.Entities.FirstOrDefault(u => u.Username == username);
+        }
+
     }
 }
