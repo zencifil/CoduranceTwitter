@@ -8,7 +8,7 @@ namespace CoduranceTwitter.Core.Services {
 
         void PostTweet(string username, string tweetText);
         void FollowUser(string username, string usernameToFollow);
-        IList<Tweet> GetTweetList(string username);
+        IList<string> GetTweetList(string username);
         User GetUser(string username);
         void RegisterUser(string username);
         IList<string> GetWall(string username);
