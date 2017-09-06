@@ -13,7 +13,7 @@ namespace CoduranceTwitter.UI {
     class Program {
 
         static void Main(string[] args) {
-            Console.WriteLine("Welcome...");
+            Console.WriteLine("Welcome... (to close the application type quit)");
 
             var provider = GetServiceProvider();
 

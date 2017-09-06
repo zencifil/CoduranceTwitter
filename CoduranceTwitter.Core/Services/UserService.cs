@@ -50,7 +50,7 @@ namespace CoduranceTwitter.Core.Services {
                 throw new ArgumentException("User does not exist!");
 
             return user.Tweets.OrderByDescending(a => a.SendDate)
-                              .Select(a => $"{username} - {a.TweetText} {TimeAgo(a.SendDate)}")
+                              .Select(a => $"{a.TweetText} {TimeAgo(a.SendDate)}")
                               .ToList();
 
         }
