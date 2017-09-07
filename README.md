@@ -1,6 +1,9 @@
 # CoduranceTwitter
 
-How To Use
+This project is created using .NET Core 2.0.
+
+
+<b>How To Use</b>
 
 - <b>Posting</b>: To post a message use -> command in between your username and your message.
 
